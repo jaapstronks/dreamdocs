@@ -1,0 +1,219 @@
+/**
+ * Vibekit Base Styles
+ * Core element styles and defaults.
+ */
+
+/* ============================================
+ * TYPOGRAPHY
+ * ============================================ */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: var(--vk-weight-semibold);
+  line-height: var(--vk-leading-tight);
+  color: var(--vk-color-text);
+}
+
+h1 { font-size: var(--vk-text-2xl); }
+h2 { font-size: var(--vk-text-xl); }
+h3 { font-size: var(--vk-text-lg); }
+h4 { font-size: var(--vk-text-base); }
+h5 { font-size: var(--vk-text-sm); }
+h6 { font-size: var(--vk-text-xs); }
+
+p {
+  margin-bottom: var(--vk-space-4);
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+small {
+  font-size: var(--vk-text-sm);
+  color: var(--vk-color-text-secondary);
+}
+
+code {
+  font-family: var(--vk-font-mono);
+  font-size: 0.9em;
+  padding: 0.125em 0.375em;
+  background: var(--vk-color-bg-muted);
+  border-radius: var(--vk-radius-sm);
+}
+
+pre {
+  font-family: var(--vk-font-mono);
+  font-size: var(--vk-text-sm);
+  padding: var(--vk-space-4);
+  background: var(--vk-color-bg-subtle);
+  border-radius: var(--vk-radius-md);
+  overflow-x: auto;
+}
+
+pre code {
+  padding: 0;
+  background: none;
+}
+
+/* ============================================
+ * LINKS
+ * ============================================ */
+a {
+  color: var(--vk-color-primary);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:focus-visible {
+  outline: 3px solid var(--vk-color-focus);
+  outline-offset: 2px;
+  border-radius: var(--vk-radius-sm);
+}
+
+/* ============================================
+ * LISTS
+ * ============================================ */
+ul, ol {
+  padding-left: var(--vk-space-6);
+  margin-bottom: var(--vk-space-4);
+}
+
+li {
+  margin-bottom: var(--vk-space-2);
+}
+
+li:last-child {
+  margin-bottom: 0;
+}
+
+/* ============================================
+ * TABLES
+ * ============================================ */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--vk-text-sm);
+}
+
+th, td {
+  padding: var(--vk-space-3) var(--vk-space-4);
+  text-align: left;
+  border-bottom: 1px solid var(--vk-color-border);
+}
+
+th {
+  font-weight: var(--vk-weight-semibold);
+  color: var(--vk-color-text-secondary);
+  background: var(--vk-color-bg-subtle);
+}
+
+tr:hover td {
+  background: var(--vk-color-bg-subtle);
+}
+
+/* ============================================
+ * FORMS (Native Elements)
+ * For cases where Shoelace isn't used.
+ * ============================================ */
+label {
+  display: block;
+  font-size: var(--vk-text-sm);
+  font-weight: var(--vk-weight-medium);
+  color: var(--vk-color-text);
+  margin-bottom: var(--vk-space-1);
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="search"],
+input[type="url"],
+input[type="tel"],
+textarea,
+select {
+  width: 100%;
+  padding: var(--vk-space-2) var(--vk-space-3);
+  font-size: var(--vk-text-base);
+  line-height: var(--vk-leading-normal);
+  color: var(--vk-color-text);
+  background: var(--vk-color-bg);
+  border: 1px solid var(--vk-color-border);
+  border-radius: var(--vk-radius-md);
+  transition: border-color var(--vk-transition-fast), box-shadow var(--vk-transition-fast);
+}
+
+input:hover,
+textarea:hover,
+select:hover {
+  border-color: var(--vk-color-border-strong);
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--vk-color-primary);
+  box-shadow: 0 0 0 3px var(--vk-color-focus);
+}
+
+input:disabled,
+textarea:disabled,
+select:disabled {
+  background: var(--vk-color-bg-muted);
+  color: var(--vk-color-text-disabled);
+  cursor: not-allowed;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--vk-color-text-muted);
+}
+
+/* ============================================
+ * HR
+ * ============================================ */
+hr {
+  border: none;
+  border-top: 1px solid var(--vk-color-border);
+  margin: var(--vk-space-6) 0;
+}
+
+/* ============================================
+ * SELECTION
+ * ============================================ */
+::selection {
+  background: var(--vk-color-primary-subtle);
+  color: var(--vk-color-text);
+}
+
+/* ============================================
+ * SCROLLBARS
+ * Subtle, functional scrollbars.
+ * ============================================ */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--vk-color-bg-subtle);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--vk-color-border-strong);
+  border-radius: var(--vk-radius-full);
+  border: 3px solid var(--vk-color-bg-subtle);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--vk-color-text-muted);
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--vk-color-border-strong) var(--vk-color-bg-subtle);
+}

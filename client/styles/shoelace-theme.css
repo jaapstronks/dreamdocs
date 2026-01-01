@@ -1,0 +1,267 @@
+/**
+ * Vibekit Shoelace Theme
+ * Maps Vibekit tokens to Shoelace CSS custom properties.
+ *
+ * This creates a cohesive look between custom elements
+ * and Shoelace components.
+ */
+
+:root {
+  /* ============================================
+   * TYPOGRAPHY
+   * ============================================ */
+  --sl-font-sans: var(--vk-font-sans);
+  --sl-font-mono: var(--vk-font-mono);
+
+  --sl-font-size-x-small: var(--vk-text-xs);
+  --sl-font-size-small: var(--vk-text-sm);
+  --sl-font-size-medium: var(--vk-text-base);
+  --sl-font-size-large: var(--vk-text-lg);
+  --sl-font-size-x-large: var(--vk-text-xl);
+  --sl-font-size-2x-large: var(--vk-text-2xl);
+  --sl-font-size-3x-large: var(--vk-text-3xl);
+
+  --sl-font-weight-normal: var(--vk-weight-normal);
+  --sl-font-weight-semibold: var(--vk-weight-semibold);
+  --sl-font-weight-bold: var(--vk-weight-bold);
+
+  --sl-line-height-dense: var(--vk-leading-tight);
+  --sl-line-height-normal: var(--vk-leading-normal);
+  --sl-line-height-loose: var(--vk-leading-relaxed);
+
+  /* ============================================
+   * SPACING
+   * ============================================ */
+  --sl-spacing-3x-small: var(--vk-space-1);
+  --sl-spacing-2x-small: var(--vk-space-1);
+  --sl-spacing-x-small: var(--vk-space-2);
+  --sl-spacing-small: var(--vk-space-2);
+  --sl-spacing-medium: var(--vk-space-4);
+  --sl-spacing-large: var(--vk-space-6);
+  --sl-spacing-x-large: var(--vk-space-8);
+  --sl-spacing-2x-large: var(--vk-space-10);
+  --sl-spacing-3x-large: var(--vk-space-12);
+
+  /* ============================================
+   * BORDERS
+   * ============================================ */
+  --sl-border-radius-small: var(--vk-radius-sm);
+  --sl-border-radius-medium: var(--vk-radius-md);
+  --sl-border-radius-large: var(--vk-radius-lg);
+  --sl-border-radius-x-large: var(--vk-radius-xl);
+  --sl-border-radius-pill: var(--vk-radius-full);
+  --sl-border-radius-circle: 50%;
+
+  --sl-border-width: var(--vk-border-width);
+
+  /* ============================================
+   * SHADOWS
+   * ============================================ */
+  --sl-shadow-x-small: var(--vk-shadow-sm);
+  --sl-shadow-small: var(--vk-shadow-sm);
+  --sl-shadow-medium: var(--vk-shadow-md);
+  --sl-shadow-large: var(--vk-shadow-lg);
+  --sl-shadow-x-large: var(--vk-shadow-xl);
+
+  /* ============================================
+   * TRANSITIONS
+   * ============================================ */
+  --sl-transition-x-fast: var(--vk-transition-fast);
+  --sl-transition-fast: var(--vk-transition-fast);
+  --sl-transition-medium: var(--vk-transition-normal);
+  --sl-transition-slow: var(--vk-transition-slow);
+  --sl-transition-x-slow: var(--vk-transition-slow);
+
+  /* ============================================
+   * FOCUS
+   * High-visibility focus rings for accessibility.
+   * ============================================ */
+  --sl-focus-ring-width: 3px;
+  --sl-focus-ring-style: solid;
+  --sl-focus-ring-color: var(--vk-color-focus-ring);
+  --sl-focus-ring: var(--sl-focus-ring-style) var(--sl-focus-ring-width) var(--sl-focus-ring-color);
+  --sl-focus-ring-offset: 2px;
+
+  /* ============================================
+   * PRIMARY COLOR (Blue)
+   * ============================================ */
+  --sl-color-primary-50: #e8f0fe;
+  --sl-color-primary-100: #d2e3fc;
+  --sl-color-primary-200: #aecbfa;
+  --sl-color-primary-300: #8ab4f8;
+  --sl-color-primary-400: #669df6;
+  --sl-color-primary-500: #4285f4;
+  --sl-color-primary-600: var(--vk-color-primary);
+  --sl-color-primary-700: var(--vk-color-primary-hover);
+  --sl-color-primary-800: #1557b0;
+  --sl-color-primary-900: #0d47a1;
+  --sl-color-primary-950: #0a3069;
+
+  /* ============================================
+   * DANGER COLOR (Red)
+   * ============================================ */
+  --sl-color-danger-50: #fce8e6;
+  --sl-color-danger-100: #fad2cf;
+  --sl-color-danger-200: #f6aea9;
+  --sl-color-danger-300: #f28b82;
+  --sl-color-danger-400: #ee675c;
+  --sl-color-danger-500: #ea4335;
+  --sl-color-danger-600: var(--vk-color-danger);
+  --sl-color-danger-700: var(--vk-color-danger-hover);
+  --sl-color-danger-800: #a50e0e;
+  --sl-color-danger-900: #7f0000;
+  --sl-color-danger-950: #5c0000;
+
+  /* ============================================
+   * SUCCESS COLOR (Green)
+   * ============================================ */
+  --sl-color-success-50: #e6f4ea;
+  --sl-color-success-100: #ceead6;
+  --sl-color-success-200: #a8dab5;
+  --sl-color-success-300: #81c995;
+  --sl-color-success-400: #5bb974;
+  --sl-color-success-500: #34a853;
+  --sl-color-success-600: var(--vk-color-success);
+  --sl-color-success-700: var(--vk-color-success-hover);
+  --sl-color-success-800: #0d652d;
+  --sl-color-success-900: #0a5125;
+  --sl-color-success-950: #073d1c;
+
+  /* ============================================
+   * WARNING COLOR (Yellow)
+   * ============================================ */
+  --sl-color-warning-50: #fef7e0;
+  --sl-color-warning-100: #feefc3;
+  --sl-color-warning-200: #fee293;
+  --sl-color-warning-300: #fdd663;
+  --sl-color-warning-400: #fcc934;
+  --sl-color-warning-500: #fbbc04;
+  --sl-color-warning-600: var(--vk-color-warning);
+  --sl-color-warning-700: var(--vk-color-warning-hover);
+  --sl-color-warning-800: #c77c00;
+  --sl-color-warning-900: #945c00;
+  --sl-color-warning-950: #613d00;
+
+  /* ============================================
+   * NEUTRAL COLOR (Gray)
+   * ============================================ */
+  --sl-color-neutral-0: #ffffff;
+  --sl-color-neutral-50: #f8f9fa;
+  --sl-color-neutral-100: #f1f3f4;
+  --sl-color-neutral-200: #e8eaed;
+  --sl-color-neutral-300: #dadce0;
+  --sl-color-neutral-400: #bdc1c6;
+  --sl-color-neutral-500: #9aa0a6;
+  --sl-color-neutral-600: #80868b;
+  --sl-color-neutral-700: #5f6368;
+  --sl-color-neutral-800: #3c4043;
+  --sl-color-neutral-900: #202124;
+  --sl-color-neutral-950: #1a1a1a;
+  --sl-color-neutral-1000: #000000;
+
+  /* ============================================
+   * FORM INPUTS
+   * ============================================ */
+  --sl-input-height-small: 32px;
+  --sl-input-height-medium: 40px;
+  --sl-input-height-large: 48px;
+
+  --sl-input-background-color: var(--vk-color-bg);
+  --sl-input-background-color-hover: var(--vk-color-bg);
+  --sl-input-background-color-focus: var(--vk-color-bg);
+  --sl-input-background-color-disabled: var(--vk-color-bg-muted);
+
+  --sl-input-border-color: var(--vk-color-border);
+  --sl-input-border-color-hover: var(--vk-color-border-strong);
+  --sl-input-border-color-focus: var(--vk-color-primary);
+  --sl-input-border-color-disabled: var(--vk-color-border-subtle);
+
+  --sl-input-color: var(--vk-color-text);
+  --sl-input-color-hover: var(--vk-color-text);
+  --sl-input-color-focus: var(--vk-color-text);
+  --sl-input-color-disabled: var(--vk-color-text-disabled);
+
+  --sl-input-placeholder-color: var(--vk-color-text-muted);
+  --sl-input-placeholder-color-disabled: var(--vk-color-text-disabled);
+
+  --sl-input-filled-background-color: var(--vk-color-bg-subtle);
+  --sl-input-filled-background-color-hover: var(--vk-color-bg-muted);
+  --sl-input-filled-background-color-focus: var(--vk-color-bg-subtle);
+  --sl-input-filled-background-color-disabled: var(--vk-color-bg-muted);
+
+  /* ============================================
+   * BUTTON OVERRIDES
+   * Make buttons feel solid and reliable.
+   * ============================================ */
+  --sl-button-font-size-small: var(--vk-text-sm);
+  --sl-button-font-size-medium: var(--vk-text-sm);
+  --sl-button-font-size-large: var(--vk-text-base);
+}
+
+/* ============================================
+ * DARK MODE ADJUSTMENTS
+ * ============================================ */
+:root.sl-theme-dark {
+  --sl-color-neutral-0: #1a1a1a;
+  --sl-color-neutral-50: #242424;
+  --sl-color-neutral-100: #2d2d2d;
+  --sl-color-neutral-200: #3c3c3c;
+  --sl-color-neutral-300: #4d4d4d;
+  --sl-color-neutral-400: #5f6368;
+  --sl-color-neutral-500: #80868b;
+  --sl-color-neutral-600: #9aa0a6;
+  --sl-color-neutral-700: #bdc1c6;
+  --sl-color-neutral-800: #dadce0;
+  --sl-color-neutral-900: #e8eaed;
+  --sl-color-neutral-950: #f1f3f4;
+  --sl-color-neutral-1000: #ffffff;
+}
+
+/* ============================================
+ * COMPONENT-SPECIFIC OVERRIDES
+ * Ensure components align with our "boring" aesthetic.
+ * ============================================ */
+
+/* Dialogs - clean, functional */
+sl-dialog::part(panel) {
+  border-radius: var(--vk-radius-lg);
+}
+
+sl-dialog::part(header) {
+  padding: var(--vk-space-4) var(--vk-space-6);
+  border-bottom: 1px solid var(--vk-color-border);
+}
+
+sl-dialog::part(body) {
+  padding: var(--vk-space-6);
+}
+
+sl-dialog::part(footer) {
+  padding: var(--vk-space-4) var(--vk-space-6);
+  border-top: 1px solid var(--vk-color-border);
+}
+
+/* Buttons - solid, reliable */
+sl-button::part(base) {
+  font-weight: var(--vk-weight-medium);
+}
+
+/* Cards - minimal elevation */
+sl-card::part(base) {
+  border-radius: var(--vk-radius-lg);
+  border: 1px solid var(--vk-color-border);
+  box-shadow: none;
+}
+
+/* Inputs - clear boundaries */
+sl-input::part(base),
+sl-textarea::part(base),
+sl-select::part(combobox) {
+  border-radius: var(--vk-radius-md);
+}
+
+/* Dropdowns - functional */
+sl-dropdown::part(panel) {
+  border-radius: var(--vk-radius-md);
+  border: 1px solid var(--vk-color-border);
+}

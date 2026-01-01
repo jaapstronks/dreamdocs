@@ -1,0 +1,212 @@
+/**
+ * Vibekit Design Tokens
+ * A boring but accessible design system for internal tools.
+ *
+ * Philosophy: Maximum clarity, minimum distraction.
+ * - High contrast for readability
+ * - Generous spacing for scannability
+ * - System fonts for familiarity
+ * - Obvious interactive states
+ */
+
+:root {
+  /* ============================================
+   * SPACING
+   * Based on 4px grid. Use consistently.
+   * ============================================ */
+  --vk-space-0: 0;
+  --vk-space-1: 0.25rem;   /* 4px - tight */
+  --vk-space-2: 0.5rem;    /* 8px - compact */
+  --vk-space-3: 0.75rem;   /* 12px - default */
+  --vk-space-4: 1rem;      /* 16px - comfortable */
+  --vk-space-5: 1.25rem;   /* 20px */
+  --vk-space-6: 1.5rem;    /* 24px - sections */
+  --vk-space-8: 2rem;      /* 32px - large gaps */
+  --vk-space-10: 2.5rem;   /* 40px */
+  --vk-space-12: 3rem;     /* 48px - page padding */
+
+  /* ============================================
+   * TYPOGRAPHY
+   * System fonts for instant loading and familiarity.
+   * ============================================ */
+  --vk-font-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --vk-font-mono: ui-monospace, 'SF Mono', 'Cascadia Code', 'Segoe UI Mono', 'Roboto Mono', Menlo, Monaco, Consolas, monospace;
+
+  /* Font sizes - deliberately limited */
+  --vk-text-xs: 0.75rem;     /* 12px - captions, badges */
+  --vk-text-sm: 0.875rem;    /* 14px - secondary text */
+  --vk-text-base: 1rem;      /* 16px - body text */
+  --vk-text-lg: 1.125rem;    /* 18px - emphasized */
+  --vk-text-xl: 1.25rem;     /* 20px - section headers */
+  --vk-text-2xl: 1.5rem;     /* 24px - page titles */
+  --vk-text-3xl: 1.875rem;   /* 30px - hero */
+
+  /* Line heights */
+  --vk-leading-none: 1;
+  --vk-leading-tight: 1.25;
+  --vk-leading-snug: 1.375;
+  --vk-leading-normal: 1.5;
+  --vk-leading-relaxed: 1.625;
+
+  /* Font weights */
+  --vk-weight-normal: 400;
+  --vk-weight-medium: 500;
+  --vk-weight-semibold: 600;
+  --vk-weight-bold: 700;
+
+  /* ============================================
+   * COLORS - LIGHT MODE
+   * High contrast, accessible palette.
+   * All pairs meet WCAG AA contrast requirements.
+   * ============================================ */
+
+  /* Backgrounds */
+  --vk-color-bg: #ffffff;
+  --vk-color-bg-subtle: #f8f9fa;
+  --vk-color-bg-muted: #f1f3f4;
+  --vk-color-bg-emphasis: #e8eaed;
+
+  /* Foregrounds */
+  --vk-color-text: #1a1a1a;
+  --vk-color-text-secondary: #5f6368;
+  --vk-color-text-muted: #80868b;
+  --vk-color-text-disabled: #bdc1c6;
+
+  /* Borders */
+  --vk-color-border: #dadce0;
+  --vk-color-border-strong: #bdc1c6;
+  --vk-color-border-subtle: #e8eaed;
+
+  /* Primary - Blue (accessible, professional) */
+  --vk-color-primary: #1a73e8;
+  --vk-color-primary-hover: #1557b0;
+  --vk-color-primary-text: #ffffff;
+  --vk-color-primary-subtle: #e8f0fe;
+
+  /* Danger - Red */
+  --vk-color-danger: #d93025;
+  --vk-color-danger-hover: #b3261e;
+  --vk-color-danger-text: #ffffff;
+  --vk-color-danger-subtle: #fce8e6;
+
+  /* Success - Green */
+  --vk-color-success: #1e8e3e;
+  --vk-color-success-hover: #137333;
+  --vk-color-success-text: #ffffff;
+  --vk-color-success-subtle: #e6f4ea;
+
+  /* Warning - Yellow/Orange */
+  --vk-color-warning: #f9ab00;
+  --vk-color-warning-hover: #e69500;
+  --vk-color-warning-text: #1a1a1a;
+  --vk-color-warning-subtle: #fef7e0;
+
+  /* Focus - High visibility */
+  --vk-color-focus: rgba(26, 115, 232, 0.5);
+  --vk-color-focus-ring: #1a73e8;
+
+  /* ============================================
+   * BORDERS & RADII
+   * Subtle, functional corners.
+   * ============================================ */
+  --vk-radius-sm: 4px;
+  --vk-radius-md: 6px;
+  --vk-radius-lg: 8px;
+  --vk-radius-xl: 12px;
+  --vk-radius-full: 9999px;
+
+  --vk-border-width: 1px;
+
+  /* ============================================
+   * SHADOWS
+   * Minimal, functional elevation.
+   * ============================================ */
+  --vk-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --vk-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --vk-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --vk-shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+
+  /* ============================================
+   * TRANSITIONS
+   * Quick, subtle animations.
+   * ============================================ */
+  --vk-transition-fast: 100ms ease;
+  --vk-transition-normal: 150ms ease;
+  --vk-transition-slow: 250ms ease;
+
+  /* ============================================
+   * LAYOUT
+   * Common dimensions.
+   * ============================================ */
+  --vk-header-height: 56px;
+  --vk-sidebar-width: 240px;
+  --vk-content-max-width: 1200px;
+  --vk-form-max-width: 600px;
+}
+
+/* ============================================
+ * DARK MODE
+ * Inverted palette with maintained contrast.
+ * ============================================ */
+:root.sl-theme-dark,
+[data-theme="dark"] {
+  /* Backgrounds */
+  --vk-color-bg: #1a1a1a;
+  --vk-color-bg-subtle: #242424;
+  --vk-color-bg-muted: #2d2d2d;
+  --vk-color-bg-emphasis: #3c3c3c;
+
+  /* Foregrounds */
+  --vk-color-text: #e8eaed;
+  --vk-color-text-secondary: #9aa0a6;
+  --vk-color-text-muted: #80868b;
+  --vk-color-text-disabled: #5f6368;
+
+  /* Borders */
+  --vk-color-border: #3c3c3c;
+  --vk-color-border-strong: #5f6368;
+  --vk-color-border-subtle: #2d2d2d;
+
+  /* Primary - Lighter for dark backgrounds */
+  --vk-color-primary: #8ab4f8;
+  --vk-color-primary-hover: #aecbfa;
+  --vk-color-primary-text: #1a1a1a;
+  --vk-color-primary-subtle: #1a3a5c;
+
+  /* Danger */
+  --vk-color-danger: #f28b82;
+  --vk-color-danger-hover: #f6aea9;
+  --vk-color-danger-text: #1a1a1a;
+  --vk-color-danger-subtle: #5c1a1a;
+
+  /* Success */
+  --vk-color-success: #81c995;
+  --vk-color-success-hover: #a8dab5;
+  --vk-color-success-text: #1a1a1a;
+  --vk-color-success-subtle: #1a3c25;
+
+  /* Warning */
+  --vk-color-warning: #fdd663;
+  --vk-color-warning-hover: #fee293;
+  --vk-color-warning-text: #1a1a1a;
+  --vk-color-warning-subtle: #5c4a1a;
+
+  /* Focus */
+  --vk-color-focus: rgba(138, 180, 248, 0.5);
+  --vk-color-focus-ring: #8ab4f8;
+
+  /* Shadows - more pronounced in dark mode */
+  --vk-shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
+  --vk-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+  --vk-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+  --vk-shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.6);
+}
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --vk-transition-fast: 0ms;
+    --vk-transition-normal: 0ms;
+    --vk-transition-slow: 0ms;
+  }
+}

@@ -1,0 +1,358 @@
+/* CIIIC Theme
+ * Professional styling with GT America typography and lime/teal accents
+ */
+
+/* ============================================================================
+   Document Base
+   ============================================================================ */
+
+.document {
+  font-family: 'GT America', system-ui, -apple-system, sans-serif;
+  font-size: 11pt;
+  line-height: 1.65;
+  color: var(--doc-text, #141414);
+  max-width: 100%;
+}
+
+/* ============================================================================
+   Typography
+   ============================================================================ */
+
+.document h1 {
+  font-family: 'GT America Extended', 'GT America', sans-serif;
+  font-size: 32pt;
+  font-weight: 500;
+  color: var(--doc-heading, #141414);
+  margin: 0 0 1em 0;
+  padding-bottom: 0.4em;
+  border-bottom: 3px solid var(--doc-accent, #dbff00);
+  line-height: 1.15;
+}
+
+.document h2 {
+  font-family: 'GT America Extended', 'GT America', sans-serif;
+  font-size: 18pt;
+  font-weight: 500;
+  color: var(--doc-heading, #141414);
+  margin: 1.8em 0 0.75em 0;
+  padding-bottom: 0.3em;
+  border-bottom: 2px solid var(--doc-accent, #dbff00);
+  line-height: 1.25;
+}
+
+.document h3 {
+  font-size: 14pt;
+  font-weight: 700;
+  color: var(--doc-heading, #141414);
+  margin: 1.5em 0 0.5em 0;
+  line-height: 1.3;
+}
+
+.document h4 {
+  font-size: 12pt;
+  font-weight: 700;
+  color: var(--doc-heading, #141414);
+  margin: 1.25em 0 0.5em 0;
+}
+
+.document p {
+  margin: 0 0 1em 0;
+}
+
+.document strong {
+  font-weight: 700;
+}
+
+.document em {
+  font-style: italic;
+}
+
+/* ============================================================================
+   Links
+   ============================================================================ */
+
+.document a {
+  color: var(--doc-link, #38766d);
+  text-decoration: none;
+}
+
+.document a:hover {
+  color: var(--doc-link-hover, #2c5f57);
+  text-decoration: underline;
+}
+
+/* ============================================================================
+   Lists
+   ============================================================================ */
+
+.document ul,
+.document ol {
+  margin: 0 0 1em 0;
+  padding-left: 2em;
+}
+
+.document ul ul,
+.document ol ol,
+.document ul ol,
+.document ol ul {
+  margin-bottom: 0;
+}
+
+.document li {
+  margin-bottom: 0.35em;
+}
+
+.document ul {
+  list-style-type: disc;
+}
+
+.document ul ul {
+  list-style-type: circle;
+}
+
+.document ul ul ul {
+  list-style-type: square;
+}
+
+.document ol {
+  list-style-type: decimal;
+}
+
+.document ol ol {
+  list-style-type: lower-alpha;
+}
+
+.document ol ol ol {
+  list-style-type: lower-roman;
+}
+
+/* ============================================================================
+   Code
+   ============================================================================ */
+
+.document code {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 0.85em;
+  background: var(--doc-code-bg, #f6f8fa);
+  color: var(--doc-code-text, #d6336c);
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+}
+
+.document pre {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 9pt;
+  line-height: 1.5;
+  background: var(--doc-code-bg, #f6f8fa);
+  padding: 1.25em;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 0 0 1.25em 0;
+  border: 1px solid var(--doc-border, #ddd);
+}
+
+.document pre code {
+  background: none;
+  color: inherit;
+  padding: 0;
+  font-size: inherit;
+}
+
+/* Syntax highlighting */
+.document .hljs-keyword,
+.document .hljs-selector-tag,
+.document .hljs-built_in {
+  color: #d73a49;
+}
+
+.document .hljs-string,
+.document .hljs-attr {
+  color: #032f62;
+}
+
+.document .hljs-comment {
+  color: #6a737d;
+}
+
+.document .hljs-function,
+.document .hljs-title {
+  color: #6f42c1;
+}
+
+.document .hljs-number {
+  color: #005cc5;
+}
+
+/* ============================================================================
+   Blockquotes & Callouts
+   ============================================================================ */
+
+.document blockquote {
+  margin: 0 0 1.25em 0;
+  padding: 0.75em 1.5em;
+  border-left: 8px solid var(--doc-callout-border, #dbff00);
+  background: var(--doc-callout-bg, #e0e5e2);
+  border-radius: 0 6px 6px 0;
+  color: var(--doc-text, #141414);
+}
+
+.document blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+/* ============================================================================
+   Tables
+   ============================================================================ */
+
+.document table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 0 1.25em 0;
+  font-size: 10pt;
+}
+
+.document th,
+.document td {
+  border: 1px solid var(--doc-border, #ddd);
+  padding: 0.6em 0.85em;
+  text-align: left;
+}
+
+.document th {
+  background: var(--doc-primary, #38766d);
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.document tr:nth-child(even) {
+  background: var(--doc-toc-bg, #f5f5f5);
+}
+
+/* ============================================================================
+   Horizontal Rules
+   ============================================================================ */
+
+.document hr {
+  border: none;
+  border-top: 2px solid var(--doc-accent, #dbff00);
+  margin: 2.5em 0;
+}
+
+/* ============================================================================
+   Images
+   ============================================================================ */
+
+.document img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+.document figure {
+  margin: 0 0 1.25em 0;
+}
+
+.document figcaption {
+  font-size: 0.9em;
+  color: var(--doc-muted, #777777);
+  text-align: center;
+  margin-top: 0.5em;
+}
+
+/* ============================================================================
+   Table of Contents
+   ============================================================================ */
+
+.document-toc {
+  background: var(--doc-toc-bg, #f5f5f5);
+  border-left: 6px solid var(--doc-primary, #38766d);
+  border-radius: 0 8px 8px 0;
+  padding: 1.5em 2em;
+  margin-bottom: 2.5em;
+}
+
+.document-toc .toc-title {
+  font-family: 'GT America Extended', 'GT America', sans-serif;
+  font-size: 14pt;
+  font-weight: 500;
+  margin: 0 0 1em 0;
+  color: var(--doc-heading, #141414);
+}
+
+.document-toc .toc-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  columns: 2;
+  column-gap: 2.5em;
+}
+
+.document-toc .toc-item {
+  margin-bottom: 0.5em;
+  break-inside: avoid;
+}
+
+.document-toc .toc-item.toc-indent {
+  padding-left: 1.5em;
+  font-size: 0.95em;
+}
+
+.document-toc .toc-item a {
+  color: var(--doc-link, #38766d);
+  text-decoration: none;
+}
+
+.document-toc .toc-item a:hover {
+  text-decoration: underline;
+}
+
+/* ============================================================================
+   Print Styles
+   ============================================================================ */
+
+@media print {
+  .document {
+    font-size: 10pt;
+  }
+
+  .document a {
+    color: var(--doc-text, #141414);
+    text-decoration: underline;
+  }
+
+  .document h1,
+  .document h2,
+  .document h3 {
+    page-break-after: avoid;
+  }
+
+  .document pre,
+  .document blockquote,
+  .document table {
+    page-break-inside: avoid;
+  }
+
+  .document-toc {
+    page-break-after: always;
+  }
+
+  .document-toc .toc-list {
+    columns: 1;
+  }
+}
+
+@page {
+  size: A4;
+  margin: 2cm;
+}
+
+/* ============================================================================
+   Page Footer (for page numbers)
+   ============================================================================ */
+
+.page-footer {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9pt;
+  color: var(--doc-muted, #777777);
+  text-align: center;
+}

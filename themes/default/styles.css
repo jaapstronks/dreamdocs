@@ -1,0 +1,348 @@
+/* DreamDocs Default Theme
+ * Clean, minimal document styling with Inter font
+ */
+
+/* ============================================================================
+   Document Base
+   ============================================================================ */
+
+.document {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-size: 11pt;
+  line-height: 1.6;
+  color: var(--doc-text, #1a1a1a);
+  max-width: 100%;
+}
+
+/* ============================================================================
+   Typography
+   ============================================================================ */
+
+.document h1 {
+  font-size: 28pt;
+  font-weight: 600;
+  color: var(--doc-heading, #000000);
+  margin: 0 0 1em 0;
+  padding-bottom: 0.5em;
+  border-bottom: 2px solid var(--doc-border, #e0e0e0);
+  line-height: 1.2;
+}
+
+.document h2 {
+  font-size: 18pt;
+  font-weight: 600;
+  color: var(--doc-heading, #000000);
+  margin: 1.5em 0 0.75em 0;
+  line-height: 1.3;
+}
+
+.document h3 {
+  font-size: 14pt;
+  font-weight: 600;
+  color: var(--doc-heading, #000000);
+  margin: 1.25em 0 0.5em 0;
+  line-height: 1.3;
+}
+
+.document h4 {
+  font-size: 12pt;
+  font-weight: 600;
+  color: var(--doc-heading, #000000);
+  margin: 1em 0 0.5em 0;
+}
+
+.document p {
+  margin: 0 0 1em 0;
+}
+
+.document strong {
+  font-weight: 600;
+}
+
+.document em {
+  font-style: italic;
+}
+
+/* ============================================================================
+   Links
+   ============================================================================ */
+
+.document a {
+  color: var(--doc-link, #0066cc);
+  text-decoration: none;
+}
+
+.document a:hover {
+  color: var(--doc-link-hover, #0052a3);
+  text-decoration: underline;
+}
+
+/* ============================================================================
+   Lists
+   ============================================================================ */
+
+.document ul,
+.document ol {
+  margin: 0 0 1em 0;
+  padding-left: 2em;
+}
+
+.document ul ul,
+.document ol ol,
+.document ul ol,
+.document ol ul {
+  margin-bottom: 0;
+}
+
+.document li {
+  margin-bottom: 0.25em;
+}
+
+.document ul {
+  list-style-type: disc;
+}
+
+.document ul ul {
+  list-style-type: circle;
+}
+
+.document ul ul ul {
+  list-style-type: square;
+}
+
+.document ol {
+  list-style-type: decimal;
+}
+
+.document ol ol {
+  list-style-type: lower-alpha;
+}
+
+.document ol ol ol {
+  list-style-type: lower-roman;
+}
+
+/* ============================================================================
+   Code
+   ============================================================================ */
+
+.document code {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 0.9em;
+  background: var(--doc-code-bg, #f5f5f5);
+  color: var(--doc-code-text, #d6336c);
+  padding: 0.15em 0.4em;
+  border-radius: 3px;
+}
+
+.document pre {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 9pt;
+  line-height: 1.5;
+  background: var(--doc-code-bg, #f5f5f5);
+  padding: 1em;
+  border-radius: 6px;
+  overflow-x: auto;
+  margin: 0 0 1em 0;
+}
+
+.document pre code {
+  background: none;
+  color: inherit;
+  padding: 0;
+  font-size: inherit;
+}
+
+/* Syntax highlighting */
+.document .hljs-keyword,
+.document .hljs-selector-tag,
+.document .hljs-built_in {
+  color: #d73a49;
+}
+
+.document .hljs-string,
+.document .hljs-attr {
+  color: #032f62;
+}
+
+.document .hljs-comment {
+  color: #6a737d;
+}
+
+.document .hljs-function,
+.document .hljs-title {
+  color: #6f42c1;
+}
+
+.document .hljs-number {
+  color: #005cc5;
+}
+
+/* ============================================================================
+   Blockquotes
+   ============================================================================ */
+
+.document blockquote {
+  margin: 0 0 1em 0;
+  padding: 0.5em 1em;
+  border-left: 4px solid var(--doc-border, #e0e0e0);
+  color: var(--doc-muted, #666666);
+  background: var(--doc-toc-bg, #fafafa);
+}
+
+.document blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+/* ============================================================================
+   Tables
+   ============================================================================ */
+
+.document table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 0 1em 0;
+  font-size: 10pt;
+}
+
+.document th,
+.document td {
+  border: 1px solid var(--doc-border, #e0e0e0);
+  padding: 0.5em 0.75em;
+  text-align: left;
+}
+
+.document th {
+  background: var(--doc-code-bg, #f5f5f5);
+  font-weight: 600;
+}
+
+.document tr:nth-child(even) {
+  background: var(--doc-toc-bg, #fafafa);
+}
+
+/* ============================================================================
+   Horizontal Rules
+   ============================================================================ */
+
+.document hr {
+  border: none;
+  border-top: 1px solid var(--doc-border, #e0e0e0);
+  margin: 2em 0;
+}
+
+/* ============================================================================
+   Images
+   ============================================================================ */
+
+.document img {
+  max-width: 100%;
+  height: auto;
+}
+
+.document figure {
+  margin: 0 0 1em 0;
+}
+
+.document figcaption {
+  font-size: 0.9em;
+  color: var(--doc-muted, #666666);
+  text-align: center;
+  margin-top: 0.5em;
+}
+
+/* ============================================================================
+   Table of Contents
+   ============================================================================ */
+
+.document-toc {
+  background: var(--doc-toc-bg, #fafafa);
+  border: 1px solid var(--doc-border, #e0e0e0);
+  border-radius: 6px;
+  padding: 1.5em;
+  margin-bottom: 2em;
+}
+
+.document-toc .toc-title {
+  font-size: 14pt;
+  font-weight: 600;
+  margin: 0 0 1em 0;
+  color: var(--doc-heading, #000000);
+}
+
+.document-toc .toc-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  columns: 2;
+  column-gap: 2em;
+}
+
+.document-toc .toc-item {
+  margin-bottom: 0.5em;
+  break-inside: avoid;
+}
+
+.document-toc .toc-item.toc-indent {
+  padding-left: 1.5em;
+  font-size: 0.95em;
+}
+
+.document-toc .toc-item a {
+  color: var(--doc-link, #0066cc);
+  text-decoration: none;
+}
+
+.document-toc .toc-item a:hover {
+  text-decoration: underline;
+}
+
+/* ============================================================================
+   Print Styles
+   ============================================================================ */
+
+@media print {
+  .document {
+    font-size: 10pt;
+  }
+
+  .document a {
+    color: var(--doc-text, #1a1a1a);
+    text-decoration: underline;
+  }
+
+  .document h2,
+  .document h3 {
+    page-break-after: avoid;
+  }
+
+  .document pre,
+  .document blockquote,
+  .document table {
+    page-break-inside: avoid;
+  }
+
+  .document-toc {
+    page-break-after: always;
+  }
+
+  .document-toc .toc-list {
+    columns: 1;
+  }
+}
+
+@page {
+  size: A4;
+  margin: 2.5cm 2cm;
+}
+
+/* ============================================================================
+   Page Footer (for page numbers)
+   ============================================================================ */
+
+.page-footer {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9pt;
+  color: var(--doc-muted, #666666);
+  text-align: center;
+}

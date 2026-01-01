@@ -47,7 +47,7 @@ const MAX_TOASTS = 6;
  * @param {ToastOptions} options
  * @returns {HTMLElement}
  */
-export function toast(message, options = {}) {
+export async function toast(message, options = {}) {
   const {
     variant = 'primary',
     icon = defaultIcons[variant],
@@ -55,6 +55,9 @@ export function toast(message, options = {}) {
     closable = true,
     id,
   } = options;
+
+  // Ensure sl-alert is defined before using it
+  await customElements.whenDefined('sl-alert');
 
   // If ID provided and toast with same ID exists, remove it first
   if (id && activeToasts.has(id)) {

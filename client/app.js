@@ -1,13 +1,12 @@
 /**
- * Vibekit Demo Application
- * Entry point for the client-side app.
+ * DreamDocs Application
+ * Convert Notion pages and markdown to beautifully styled PDFs.
  */
 
 import { route, notFound, startRouter, navigate } from './lib/router.js';
 import { initTheme, createThemeToggle } from './lib/theme.js';
 import { $, h, empty } from './lib/dom.js';
-import { renderItemList } from './views/items/list.js';
-import { renderItemForm } from './views/items/form.js';
+import { renderConverter } from './views/converter/index.js';
 import { renderSettings } from './views/settings.js';
 
 // Initialize theme
@@ -26,13 +25,13 @@ function renderShell(content, { activeNav = '' } = {}) {
   const shell = h('div', { class: 'vk-shell-header' }, [
     // Header
     h('header', { class: 'vk-header' }, [
-      h('a', { href: '/', class: 'vk-header-logo' }, ['Vibekit Demo']),
+      h('a', { href: '/', class: 'vk-header-logo' }, ['DreamDocs']),
 
       h('nav', { class: 'vk-header-nav' }, [
         h('a', {
           href: '/',
-          class: activeNav === 'items' ? 'is-active' : '',
-        }, ['Items']),
+          class: activeNav === 'convert' ? 'is-active' : '',
+        }, ['Convert']),
         h('a', {
           href: '/settings',
           class: activeNav === 'settings' ? 'is-active' : '',
@@ -71,25 +70,11 @@ function render404() {
 
 // Define routes
 
-// Items list (home page)
+// Converter (home page)
 route('/', async () => {
   const content = h('div', {});
-  renderShell(content, { activeNav: 'items' });
-  return renderItemList(content);
-});
-
-// New item
-route('/items/new', async () => {
-  const content = h('div', {});
-  renderShell(content, { activeNav: 'items' });
-  return renderItemForm(content);
-});
-
-// Edit item
-route('/items/:id/edit', async ({ params }) => {
-  const content = h('div', {});
-  renderShell(content, { activeNav: 'items' });
-  return renderItemForm(content, params.id);
+  renderShell(content, { activeNav: 'convert' });
+  return renderConverter(content);
 });
 
 // Settings

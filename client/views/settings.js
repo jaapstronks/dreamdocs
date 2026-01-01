@@ -1,12 +1,13 @@
 /**
  * Settings View
- * Demo settings page showing settings panel pattern.
+ * Application settings page.
  */
 
 import { h, empty } from '../lib/dom.js';
 import { pageHeader, settingsSection } from '../lib/components.js';
 import { getTheme, setTheme } from '../lib/theme.js';
 import { success } from '../lib/toast.js';
+import { slSelect, slSwitch, slInput, slButton, sl } from '../lib/shoelace.js';
 
 /**
  * Render the settings view
@@ -28,19 +29,13 @@ function render(container) {
   empty(container);
 
   // Theme toggle
-  const themeSelect = document.createElement('sl-select');
-  themeSelect.value = getTheme();
-  themeSelect.hoist = true;
+  const themeSelect = slSelect({
+    value: getTheme(),
+    hoist: true,
+  });
 
-  const lightOption = document.createElement('sl-option');
-  lightOption.value = 'light';
-  lightOption.textContent = 'Light';
-  themeSelect.appendChild(lightOption);
-
-  const darkOption = document.createElement('sl-option');
-  darkOption.value = 'dark';
-  darkOption.textContent = 'Dark';
-  themeSelect.appendChild(darkOption);
+  themeSelect.appendChild(sl('sl-option', { value: 'light' }, ['Light']));
+  themeSelect.appendChild(sl('sl-option', { value: 'dark' }, ['Dark']));
 
   themeSelect.addEventListener('sl-change', (e) => {
     setTheme(e.target.value);
@@ -48,17 +43,17 @@ function render(container) {
   });
 
   // Notification toggle
-  const notifySwitch = document.createElement('sl-switch');
-  notifySwitch.checked = true;
+  const notifySwitch = slSwitch({ checked: true });
   notifySwitch.addEventListener('sl-change', (e) => {
     success(e.target.checked ? 'Notifications enabled' : 'Notifications disabled');
   });
 
   // Email input
-  const emailInput = document.createElement('sl-input');
-  emailInput.type = 'email';
-  emailInput.placeholder = 'your@email.com';
-  emailInput.style.width = '250px';
+  const emailInput = slInput({
+    type: 'email',
+    placeholder: 'your@email.com',
+    style: { width: '250px' },
+  });
 
   // Appearance section
   const appearanceSection = settingsSection({
@@ -92,6 +87,12 @@ function render(container) {
   });
 
   // Danger zone
+  const deleteButton = slButton({
+    variant: 'danger',
+    outline: true,
+    text: 'Delete All',
+  });
+
   const dangerSection = h('div', { class: 'vk-settings-section mt-8' }, [
     h('h2', { class: 'vk-settings-section-title text-danger' }, ['Danger Zone']),
     h('p', { class: 'vk-settings-section-description' }, [
@@ -105,7 +106,7 @@ function render(container) {
             'Permanently delete all items. This cannot be undone.',
           ]),
         ]),
-        h('sl-button', { variant: 'danger', outline: true }, ['Delete All']),
+        deleteButton,
       ]),
     ]),
   ]);

@@ -1,0 +1,46 @@
+{
+  "name": "Default",
+  "description": "Clean, minimal document theme with Inter font family",
+  "version": "1.0.0",
+  "author": "DreamDocs",
+  "fonts": [
+    {
+      "family": "Inter",
+      "weight": 400,
+      "style": "normal",
+      "src": "fonts/Inter-Regular.woff2"
+    },
+    {
+      "family": "Inter",
+      "weight": 600,
+      "style": "normal",
+      "src": "fonts/Inter-SemiBold.woff2"
+    },
+    {
+      "family": "JetBrains Mono",
+      "weight": 400,
+      "style": "normal",
+      "src": "fonts/JetBrainsMono-Regular.woff2"
+    }
+  ],
+  "colors": {
+    "text": "#1a1a1a",
+    "heading": "#000000",
+    "link": "#0066cc",
+    "link-hover": "#0052a3",
+    "code-bg": "#f5f5f5",
+    "code-text": "#d6336c",
+    "border": "#e0e0e0",
+    "muted": "#666666",
+    "toc-bg": "#fafafa"
+  },
+  "pageSettings": {
+    "format": "A4",
+    "margins": {
+      "top": "2.5cm",
+      "right": "2cm",
+      "bottom": "2.5cm",
+      "left": "2cm"
+    }
+  }
+}

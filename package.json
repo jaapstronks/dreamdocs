@@ -1,15 +1,17 @@
 {
-  "name": "vibekit",
+  "name": "dreamdocs",
   "version": "0.1.0",
-  "description": "Boring but accessible starter kit for internal tool applications",
+  "description": "Convert Notion pages and markdown to beautifully styled PDFs with configurable themes",
   "type": "module",
   "engines": {
     "node": ">=20"
   },
   "scripts": {
-    "dev": "node --watch --experimental-strip-types server/server.ts",
-    "start": "node --experimental-strip-types server/server.ts",
-    "build": "tsc",
+    "dev": "npm run build:client -- --dev && tsx watch server/server.ts",
+    "start": "tsx server/server.ts",
+    "build": "npm run build:client && tsc",
+    "build:client": "node scripts/build-client.js",
+    "build:client:watch": "node scripts/build-client.js --watch --dev",
     "lint": "eslint . --ext .ts,.js",
     "lint:fix": "eslint . --ext .ts,.js --fix",
     "format": "prettier --write .",
@@ -18,21 +20,26 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:e2e": "playwright test",
-    "check": "npm run typecheck && npm run lint && npm run format:check",
-    "postinstall": "node scripts/setup-shoelace.js"
+    "check": "npm run typecheck && npm run lint && npm run format:check"
   },
   "dependencies": {
+    "@notionhq/client": "^2.2.14",
     "@shoelace-style/shoelace": "^2.19.1",
+    "highlight.js": "^11.9.0",
+    "markdown-it": "^14.0.0",
+    "markdown-it-anchor": "^8.6.7",
     "zod": "^3.24.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",
     "@playwright/test": "^1.49.1",
     "@types/node": "^22.10.2",
+    "esbuild": "^0.24.0",
     "eslint": "^9.17.0",
     "eslint-config-prettier": "^9.1.0",
     "globals": "^15.14.0",
     "prettier": "^3.4.2",
+    "tsx": "^4.21.0",
     "typescript": "^5.7.2",
     "typescript-eslint": "^8.18.2",
     "vitest": "^2.1.8"

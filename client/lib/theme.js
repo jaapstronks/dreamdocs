@@ -149,4 +149,3 @@ export function createThemeSelector() {
 
 // Legacy exports for backwards compatibility
 export { getEffectiveTheme as getTheme };
-export { createThemeToggle as createThemeToggle };

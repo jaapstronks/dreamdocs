@@ -3,12 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vibekit Demo</title>
+  <title>DreamDocs</title>
 
-  <!-- Shoelace -->
-  <link rel="stylesheet" href="/vendor/shoelace/themes/light.css">
-  <link rel="stylesheet" href="/vendor/shoelace/themes/dark.css" media="(prefers-color-scheme: dark)">
-  <script type="module" src="/vendor/shoelace/shoelace-autoloader.js"></script>
+  <!-- Shoelace themes (copied during build) -->
+  <link rel="stylesheet" href="/dist/shoelace/themes/light.css">
+  <link rel="stylesheet" href="/dist/shoelace/themes/dark.css" media="(prefers-color-scheme: dark)">
 
   <!-- App styles -->
   <link rel="stylesheet" href="/styles/tokens.css">
@@ -40,6 +39,6 @@
   <!-- Toast container -->
   <div id="toast-container" class="toast-container"></div>
 
-  <script type="module" src="/app.js"></script>
+  <script type="module" src="/dist/app.js"></script>
 </body>
 </html>

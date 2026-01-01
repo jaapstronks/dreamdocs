@@ -850,3 +850,324 @@ body.is-loading {
 .vk-markdown-preview a {
   color: var(--vk-color-primary);
 }
+
+/* ============================================
+ * CONVERTER PAGE
+ * Document conversion interface.
+ * ============================================ */
+.converter-page {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.converter-layout {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: var(--vk-space-6);
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .converter-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.converter-input {
+  background: var(--vk-color-bg);
+  border: 1px solid var(--vk-color-border);
+  border-radius: var(--vk-radius-lg);
+  padding: var(--vk-space-4);
+}
+
+.converter-sidebar {
+  position: sticky;
+  top: calc(var(--vk-header-height) + var(--vk-space-6));
+}
+
+/* ============================================
+ * OPTIONS PANEL
+ * Conversion options and actions.
+ * ============================================ */
+.options-panel {
+  background: var(--vk-color-bg);
+  border: 1px solid var(--vk-color-border);
+  border-radius: var(--vk-radius-lg);
+  padding: var(--vk-space-4);
+}
+
+.options-section {
+  margin-bottom: var(--vk-space-4);
+  padding-bottom: var(--vk-space-4);
+  border-bottom: 1px solid var(--vk-color-border-subtle);
+}
+
+.options-section:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.options-section-title {
+  font-size: var(--vk-text-sm);
+  font-weight: var(--vk-weight-semibold);
+  color: var(--vk-color-text);
+  margin-bottom: var(--vk-space-3);
+}
+
+.options-theme-select {
+  width: 100%;
+  margin-bottom: var(--vk-space-3);
+}
+
+.options-toggles {
+  display: flex;
+  flex-direction: column;
+  gap: var(--vk-space-2);
+}
+
+.options-toggles sl-switch {
+  font-size: var(--vk-text-sm);
+}
+
+.options-actions {
+  padding-top: var(--vk-space-4);
+}
+
+.options-convert-button {
+  width: 100%;
+}
+
+.options-downloads {
+  padding-top: var(--vk-space-4);
+}
+
+.options-downloads-label {
+  font-size: var(--vk-text-sm);
+  font-weight: var(--vk-weight-medium);
+  color: var(--vk-color-text-secondary);
+  margin-bottom: var(--vk-space-2);
+}
+
+.options-downloads-buttons {
+  display: flex;
+  gap: var(--vk-space-2);
+}
+
+.options-downloads-buttons sl-button {
+  flex: 1;
+}
+
+.options-metadata {
+  padding-top: var(--vk-space-3);
+  margin-top: var(--vk-space-3);
+  border-top: 1px solid var(--vk-color-border-subtle);
+}
+
+.options-metadata-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--vk-text-sm);
+  padding: var(--vk-space-1) 0;
+}
+
+.options-metadata-label {
+  color: var(--vk-color-text-muted);
+}
+
+.options-metadata-value {
+  font-weight: var(--vk-weight-medium);
+  color: var(--vk-color-text);
+}
+
+/* ============================================
+ * PASTE TAB
+ * Markdown paste input.
+ * ============================================ */
+.paste-tab {
+  display: flex;
+  flex-direction: column;
+  gap: var(--vk-space-3);
+}
+
+.paste-title-input {
+  width: 100%;
+}
+
+.paste-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.paste-toolbar-left {
+  display: flex;
+  gap: var(--vk-space-1);
+}
+
+.paste-char-count {
+  font-size: var(--vk-text-xs);
+}
+
+.paste-textarea {
+  width: 100%;
+}
+
+.paste-textarea::part(textarea) {
+  font-family: var(--vk-font-mono);
+  font-size: var(--vk-text-sm);
+}
+
+/* ============================================
+ * UPLOAD TAB
+ * File upload interface.
+ * ============================================ */
+.upload-tab {
+  display: flex;
+  flex-direction: column;
+  gap: var(--vk-space-4);
+}
+
+.upload-file-info {
+  display: flex;
+  align-items: center;
+  gap: var(--vk-space-3);
+  padding: var(--vk-space-3);
+  background: var(--vk-color-bg-subtle);
+  border-radius: var(--vk-radius-md);
+}
+
+.upload-file-icon {
+  font-size: 1.5rem;
+  color: var(--vk-color-primary);
+}
+
+.upload-file-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.upload-file-name {
+  font-size: var(--vk-text-sm);
+  font-weight: var(--vk-weight-medium);
+  color: var(--vk-color-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.upload-file-size {
+  font-size: var(--vk-text-xs);
+}
+
+.upload-preview {
+  border: 1px solid var(--vk-color-border);
+  border-radius: var(--vk-radius-md);
+  overflow: hidden;
+}
+
+.upload-preview-header {
+  padding: var(--vk-space-2) var(--vk-space-3);
+  background: var(--vk-color-bg-subtle);
+  border-bottom: 1px solid var(--vk-color-border);
+  font-size: var(--vk-text-xs);
+  font-weight: var(--vk-weight-medium);
+  color: var(--vk-color-text-muted);
+}
+
+.upload-preview-content {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.upload-preview-text {
+  margin: 0;
+  padding: var(--vk-space-3);
+  font-family: var(--vk-font-mono);
+  font-size: var(--vk-text-xs);
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* ============================================
+ * NOTION TAB
+ * Notion page import.
+ * ============================================ */
+.notion-tab {
+  display: flex;
+  flex-direction: column;
+  gap: var(--vk-space-4);
+}
+
+.notion-input-row {
+  display: flex;
+  gap: var(--vk-space-2);
+  align-items: flex-end;
+}
+
+.notion-url-input {
+  flex: 1;
+}
+
+.notion-loading {
+  font-size: 1.25rem;
+}
+
+.notion-preview {
+  border: 1px solid var(--vk-color-border);
+  border-radius: var(--vk-radius-md);
+  overflow: hidden;
+}
+
+.notion-preview-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--vk-space-2) var(--vk-space-3);
+  background: var(--vk-color-bg-subtle);
+  border-bottom: 1px solid var(--vk-color-border);
+}
+
+.notion-preview-title {
+  font-size: var(--vk-text-sm);
+  font-weight: var(--vk-weight-medium);
+  color: var(--vk-color-text);
+}
+
+.notion-preview-content {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.notion-preview-text {
+  margin: 0;
+  padding: var(--vk-space-3);
+  font-family: var(--vk-font-mono);
+  font-size: var(--vk-text-xs);
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.notion-help {
+  font-size: var(--vk-text-sm);
+  padding: var(--vk-space-3);
+  background: var(--vk-color-bg-subtle);
+  border-radius: var(--vk-radius-md);
+}
+
+.notion-help p {
+  margin: 0 0 var(--vk-space-2) 0;
+}
+
+.notion-help ol {
+  margin: 0;
+  padding-left: var(--vk-space-4);
+}
+
+.notion-help li {
+  margin-bottom: var(--vk-space-1);
+}

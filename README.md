@@ -1,33 +1,20 @@
-# Vibekit
+# DreamDocs
 
-A boring but accessible starter kit for building internal tool applications.
+Convert Notion pages and markdown to beautifully styled PDF documents with configurable themes.
 
-## Philosophy
+## Features
 
-**"Boring" UI that just works.** The application chrome should be invisible - users focus on the content they're creating, not the tool itself.
-
-- **Minimal dependencies** - Every dependency is a liability
-- **No magic** - Explicit over implicit, readable by newcomers
-- **Accessible by default** - WCAG AA compliant, keyboard navigable
-- **File-based everything** - No database setup required
-
-## Stack
-
-| Layer | Technology |
-|-------|------------|
-| Language | TypeScript (server), JavaScript (client) |
-| UI Components | [Shoelace](https://shoelace.style/) web components |
-| Styling | CSS Variables + minimal utilities |
-| Server | Native Node.js HTTP (no framework) |
-| Testing | Vitest (unit) + Playwright (E2E) |
-| Linting | ESLint + Prettier |
+- **Notion Integration** - Import directly from Notion pages
+- **Markdown Support** - Paste or upload markdown files
+- **Professional Themes** - Choose from multiple document styles
+- **Table of Contents** - Auto-generated navigation
+- **Code Highlighting** - Syntax highlighting for code blocks
+- **Dual Export** - Download as PDF or HTML
 
 ## Quick Start
 
 ```bash
-# Clone and install
-git clone https://github.com/your-org/vibekit.git my-app
-cd my-app
+# Install dependencies
 npm install
 
 # Copy environment file
@@ -37,226 +24,146 @@ cp .env.example .env
 npm run dev
 ```
 
-Visit http://localhost:3000 to see the demo app.
+Visit `http://localhost:3000` to use DreamDocs.
+
+## Notion Integration
+
+To enable Notion import:
+
+1. Go to [Notion Integrations](https://www.notion.so/my-integrations)
+2. Create a new integration
+3. Copy the API key to your `.env` file:
+   ```
+   NOTION_API_KEY=secret_xxx
+   ```
+4. Share pages with your integration (from the page menu, click "Add connections")
 
 ## Project Structure
 
 ```
-vibekit/
-├── client/                 # Browser code (ESM)
-│   ├── index.html         # Entry point
-│   ├── app.js             # Application bootstrap
+dreamdocs/
+├── client/                 # Browser code
+│   ├── views/converter/   # Conversion UI
 │   ├── lib/               # Utilities
-│   │   ├── api.js         # API client
-│   │   ├── dom.js         # DOM helpers
-│   │   ├── router.js      # Client-side routing
-│   │   ├── toast.js       # Notifications
-│   │   ├── dialogs.js     # Confirm/alert/prompt
-│   │   ├── theme.js       # Light/dark mode
-│   │   └── components.js  # UI component helpers
-│   ├── views/             # Route views
 │   └── styles/            # CSS
-│       ├── tokens.css     # Design tokens
-│       ├── reset.css      # CSS reset
-│       ├── shoelace-theme.css  # Shoelace overrides
-│       ├── base.css       # Element styles
-│       ├── components.css # Component styles
-│       └── utilities.css  # Utility classes
 │
 ├── server/                # Node.js server
-│   ├── server.ts          # Entry point
-│   ├── config/            # Configuration
-│   ├── routes/            # HTTP handlers
-│   │   ├── api/          # API endpoints
-│   │   └── static.ts     # Static file server
-│   ├── storage/           # Data access
-│   └── utils/             # Helpers
+│   ├── services/          # Business logic
+│   │   ├── pdf.ts        # PDF generation (Playwright)
+│   │   ├── markdown.ts   # Markdown parsing
+│   │   ├── notion.ts     # Notion API client
+│   │   └── themes.ts     # Theme management
+│   ├── routes/api/        # API endpoints
+│   └── templates/         # Document templates
 │
-├── shared/                # Shared code
-│   └── types/            # TypeScript types
-│
-├── tests/                 # Tests
-│   ├── unit/             # Vitest
-│   └── e2e/              # Playwright
-│
-└── docs/                  # Documentation
+└── themes/                # Document themes
+    └── default/          # Default theme
+        ├── theme.json    # Theme config
+        ├── styles.css    # Document styles
+        └── fonts/        # Font files
 ```
 
-## Available Scripts
+## Themes
+
+DreamDocs uses a theme system for document styling. Themes are stored in the `/themes` directory.
+
+### Default Theme
+
+The default theme uses Inter and JetBrains Mono fonts with a clean, minimal design.
+
+### Creating Custom Themes
+
+1. Create a new folder in `/themes/`
+2. Add `theme.json` with metadata:
+   ```json
+   {
+     "name": "My Theme",
+     "description": "A custom document theme",
+     "fonts": [
+       { "family": "Inter", "weight": 400, "src": "fonts/Inter-Regular.woff2" }
+     ],
+     "colors": {
+       "text": "#1a1a1a",
+       "heading": "#000000",
+       "link": "#0066cc",
+       "code-bg": "#f5f5f5"
+     },
+     "pageSettings": {
+       "format": "A4",
+       "margins": { "top": "2.5cm", "right": "2cm", "bottom": "2.5cm", "left": "2cm" }
+     }
+   }
+   ```
+3. Add `styles.css` with document styles using `--doc-*` CSS variables:
+   - `--doc-text` - Body text color
+   - `--doc-heading` - Heading color
+   - `--doc-link` - Link color
+   - `--doc-code-bg` - Code block background
+   - `--doc-border` - Border color
+
+## Tech Stack
+
+| Layer | Technology |
+|-------|------------|
+| Server | Node.js with native HTTP (TypeScript) |
+| Client | Vanilla JavaScript + Shoelace web components |
+| PDF Generation | Playwright (headless Chrome) |
+| Markdown | markdown-it with plugins |
+| Notion | Official @notionhq/client SDK |
+
+## Scripts
 
 ```bash
-npm run dev        # Start dev server with watch mode
+npm run dev        # Start development server with hot reload
 npm run start      # Start production server
-npm run build      # Build TypeScript
-npm run lint       # Run ESLint
-npm run format     # Run Prettier
+npm run build      # Type check and build
 npm run test       # Run unit tests
 npm run test:e2e   # Run E2E tests
-npm run check      # Run all checks
+npm run lint       # Lint code
+npm run format     # Format code
 ```
 
-## UI Components
+## API Endpoints
 
-Vibekit uses [Shoelace](https://shoelace.style/) for UI components. Common patterns are wrapped in helper functions:
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/api/convert` | POST | Convert markdown to PDF/HTML |
+| `/api/convert/preview` | POST | Generate HTML preview only |
+| `/api/themes` | GET | List available themes |
+| `/api/themes/:id` | GET | Get theme details |
+| `/api/notion/fetch` | POST | Fetch Notion page as markdown |
+| `/api/notion/status` | GET | Check Notion integration status |
 
-### Page Header
+### Convert Request
 
-```javascript
-import { pageHeader } from './lib/components.js';
-
-pageHeader({
-  title: 'Items',
-  subtitle: '12 items',
-  actions: [
-    h('sl-button', { variant: 'primary' }, ['New Item'])
-  ]
-});
+```json
+{
+  "source": "markdown",
+  "content": "# Hello World\n\nThis is markdown.",
+  "options": {
+    "themeId": "default",
+    "generateToc": true,
+    "pageNumbers": true,
+    "title": "My Document"
+  }
+}
 ```
 
-### Form Group
+### Convert Response
 
-```javascript
-import { formGroup } from './lib/components.js';
-
-const input = document.createElement('sl-input');
-input.required = true;
-
-formGroup({
-  label: 'Name',
-  id: 'item-name',
-  required: true,
-  help: 'Enter the item name',
-  error: null, // or error message
-  input: input
-});
+```json
+{
+  "pdf": "<base64 encoded PDF>",
+  "html": "<complete HTML document>",
+  "metadata": {
+    "title": "My Document",
+    "pageCount": 3,
+    "generatedAt": "2024-01-15T10:30:00Z",
+    "themeId": "default",
+    "tocEntries": 5
+  }
+}
 ```
-
-### Data Table
-
-```javascript
-import { dataTable } from './lib/components.js';
-
-dataTable({
-  columns: [
-    { key: 'name', label: 'Name' },
-    { key: 'status', label: 'Status', width: '100px' }
-  ],
-  data: items,
-  renderCell: (row, col) => row[col.key],
-  renderActions: (row) => [
-    h('sl-icon-button', { name: 'pencil', label: 'Edit' }),
-    h('sl-icon-button', { name: 'trash', label: 'Delete' })
-  ],
-  emptyMessage: 'No items yet'
-});
-```
-
-### Dialogs
-
-```javascript
-import { confirm, confirmDelete, alert, prompt } from './lib/dialogs.js';
-
-// Confirmation
-const confirmed = await confirm({
-  title: 'Confirm Action',
-  message: 'Are you sure?',
-  confirmText: 'Yes',
-  cancelText: 'No',
-  variant: 'primary' // or 'danger'
-});
-
-// Delete confirmation
-const shouldDelete = await confirmDelete('Item Name');
-
-// Alert
-await alert({
-  title: 'Notice',
-  message: 'Something happened'
-});
-
-// Prompt
-const value = await prompt({
-  title: 'Rename',
-  label: 'New name',
-  value: 'Current name'
-});
-```
-
-### Toasts
-
-```javascript
-import { success, error, warning, info } from './lib/toast.js';
-
-success('Item saved');
-error('Failed to save');
-warning('Check your input');
-info('New version available');
-```
-
-## App Shell Variants
-
-Three shell layouts are available via CSS classes:
-
-### Minimal Shell
-```html
-<div class="vk-shell-minimal">
-  <header class="vk-header">...</header>
-  <main class="vk-main">...</main>
-</div>
-```
-
-### Header Shell (default)
-```html
-<div class="vk-shell-header">
-  <header class="vk-header">
-    <a class="vk-header-logo">Logo</a>
-    <nav class="vk-header-nav">...</nav>
-    <div class="vk-header-spacer"></div>
-    <div class="vk-header-actions">...</div>
-  </header>
-  <main class="vk-main">...</main>
-</div>
-```
-
-### Sidebar Shell
-```html
-<div class="vk-shell-sidebar">
-  <aside class="vk-sidebar">
-    <div class="vk-sidebar-header">...</div>
-    <nav class="vk-sidebar-nav">...</nav>
-    <div class="vk-sidebar-footer">...</div>
-  </aside>
-  <div class="vk-content">
-    <header class="vk-topbar">...</header>
-    <main class="vk-main">...</main>
-  </div>
-</div>
-```
-
-## Adding a New Feature
-
-1. **Create API endpoint** in `server/routes/api/`
-2. **Add storage** in `server/storage/`
-3. **Create view** in `client/views/`
-4. **Add route** in `client/app.js`
-
-See the Items feature for a complete example.
-
-## Theming
-
-Design tokens are in `client/styles/tokens.css`. Override Shoelace in `client/styles/shoelace-theme.css`.
-
-The theme supports light and dark mode automatically based on system preference, with manual override available.
-
-## Accessibility
-
-Every Vibekit app includes:
-
-- Skip link (first focusable element)
-- Visible focus indicators
-- ARIA labels on interactive elements
-- Screen reader announcements for dynamic content
-- Keyboard navigation support
 
 ## License
 

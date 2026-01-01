@@ -5,7 +5,9 @@
  */
 
 import type { IncomingMessage, ServerResponse } from 'node:http';
-import { handleItems } from './items.js';
+import { handleConvert } from './convert.js';
+import { handleThemes } from './themes.js';
+import { handleNotion } from './notion.js';
 import { notFound } from '../../utils/http.js';
 
 export interface ApiContext {
@@ -19,12 +21,14 @@ export interface ApiContext {
  * Routes requests to appropriate handlers.
  */
 export async function handleApi(ctx: ApiContext): Promise<void> {
-  // Items (demo CRUD resource)
-  if (await handleItems(ctx)) return;
+  // Conversion routes (main functionality)
+  if (await handleConvert(ctx)) return;
 
-  // Add more handlers here:
-  // if (await handleUsers(ctx)) return;
-  // if (await handleSettings(ctx)) return;
+  // Theme routes
+  if (await handleThemes(ctx)) return;
+
+  // Notion routes
+  if (await handleNotion(ctx)) return;
 
   // No handler matched
   notFound(ctx.res);

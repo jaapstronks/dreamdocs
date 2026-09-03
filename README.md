@@ -28,11 +28,25 @@ Visit `http://localhost:3000` to use DreamDocs.
 
 ## Production
 
-do ssh root@51...
+`docs.ciiic.nl` deploys itself: push to `main` on `CIIICnl/docbot` and the
+Coolify GitHub App rebuilds and redeploys. There is no `/opt/docbot` checkout
+and no compose file on the box - the instructions that used to stand here were
+left over from an older host.
 
-cd /opt/docbot
-git pull origin main
-docker compose up -d --build
+```bash
+git push origin main   # → Coolify rebuilds docs.ciiic.nl
+```
+
+To inspect what is actually running:
+
+```bash
+ssh root@51.15.131.87
+docker ps --filter label=coolify.resourceName=docbot
+docker inspect <container> --format '{{range .Config.Env}}{{println .}}{{end}}' | grep SOURCE_COMMIT
+```
+
+Redeploy by hand from the Coolify UI or API, not with `docker compose`. See
+`CLAUDE.md` > Deploy.
 
 ## Auth
 

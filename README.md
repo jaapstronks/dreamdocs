@@ -34,6 +34,50 @@ cd /opt/docbot
 git pull origin main
 docker compose up -d --build
 
+## Auth
+
+### Fail closed, always
+
+Docbot needs two things to enforce auth: `AUTH_SECRET` for signing sessions, and
+at least one user source - the `AUTH_USERS_JSON` / `AUTH_USERS_B64` env list, or
+the shared `users` table in the `dreamslides` database (`STORAGE_MODE=postgres`).
+
+If either is missing, the server **refuses to start** (`assertAuthConfigured()`
+in `server/server.ts`) and, should it ever get past boot, every request is denied
+rather than served as an anonymous admin. An empty env or an unreachable database
+therefore takes docbot offline; it does not take the lock off the door.
+
+The one sanctioned way to run without auth is `AUTH_DEV_BYPASS=1`, which has to be
+set on purpose and logs a warning at boot. Never set it on a deployed instance.
+
+Authorization itself is per document, keyed on `authedUser.email`. No route reads
+`role` or `isAdmin` today; if you add one that does, check the service token below.
+
+### `DOCBOT_INTERNAL_TOKEN` — the service-to-service token
+
+A shared bearer token that lets trusted internal callers in without a user
+session. It is accepted on exactly two paths (`server/routes/api/index.ts`):
+
+| Path | What the token buys |
+|---|---|
+| `/api/convert*` | A stateless render as a plain `user`, no on-behalf-of |
+| `POST /api/documents` | A document created for the address in `X-On-Behalf-Of`, without a `users` row - the caller has already verified that user |
+
+The second one is the wide half: whoever holds the token can create documents in
+anyone's name. It is deliberate (ciiicbot verifies the user against the shared
+`sb_session` before delegating) but it means the token is a credential, not a
+convenience.
+
+**Who holds it:** docbot itself (Coolify env on the docs.ciiic.nl app), ciiicbot
+(passes it to `mcp-docbot`), and ciiic-dashboard (PDF export of survey reports).
+Local `.env` files of anyone who has run those.
+
+**Rotating it:** generate a new value (`openssl rand -hex 32`), set it on docbot
+first, then on ciiicbot and ciiic-dashboard, then redeploy all three. There is no
+grace period - docbot compares against one value - so expect a short window in
+which delegated calls fail. Rotate when someone with access leaves, when the
+token has been in a shared channel or a log, and otherwise once a year.
+
 ## Notion Integration
 
 To enable Notion import:

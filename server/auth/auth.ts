@@ -136,11 +136,18 @@ let cachedUsers: Map<string, StoredUser> | null = null;
 let warnedAuthMisconfig = false;
 
 /**
- * Check if auth is enabled.
- * Auth is enabled if:
- * - AUTH_SECRET is set AND (AUTH_USERS_* is set OR database mode is available)
+ * Why auth cannot be enforced right now, or null when it can.
+ *
+ * Auth needs a signing secret plus at least one user source: the AUTH_USERS_*
+ * env list or the shared `users` table. Missing either is a misconfiguration,
+ * never a mode: every caller below denies instead of falling back to an
+ * anonymous session. assertAuthConfigured() turns the same check into a boot
+ * failure so a broken deploy never starts serving.
+ *
+ * The one sanctioned way to run without auth is AUTH_DEV_BYPASS, which has to
+ * be switched on deliberately.
  */
-export function authEnabled(): boolean {
+export function authConfigProblem(): string | null {
   const hasUsers =
     !!String(process.env.AUTH_USERS_JSON || '').trim() ||
     !!String(process.env.AUTH_USERS_B64 || '').trim();
@@ -149,15 +156,43 @@ export function authEnabled(): boolean {
   ).trim();
   const hasDatabase = isDatabaseAvailable();
 
-  if (hasUsers && !hasSecret && !warnedAuthMisconfig) {
+  if (!hasSecret) return 'AUTH_SECRET is not set';
+  if (!hasUsers && !hasDatabase)
+    return 'no user source: AUTH_USERS_JSON/AUTH_USERS_B64 is empty and the database is unavailable';
+  return null;
+}
+
+/**
+ * Check if auth can be enforced. False means misconfigured, not "open".
+ */
+export function authEnabled(): boolean {
+  const problem = authConfigProblem();
+  if (problem && !warnedAuthMisconfig) {
     warnedAuthMisconfig = true;
+    console.error(`[auth] refusing all requests: ${problem}`);
+  }
+  return problem === null;
+}
+
+/**
+ * Boot-time gate. Call once before the server starts listening: a deploy that
+ * cannot enforce auth should fail loudly rather than serve every visitor as
+ * admin. Throws; the caller decides how to exit.
+ */
+export function assertAuthConfigured(): void {
+  if (devAuthBypassEnabled()) {
     console.warn(
-      '[auth] AUTH_USERS_* is set but AUTH_SECRET is missing; auth disabled until configured.'
+      '[auth] AUTH_DEV_BYPASS is on — every request is an admin. Never set this on a deployed instance.'
+    );
+    return;
+  }
+  const problem = authConfigProblem();
+  if (problem) {
+    throw new Error(
+      `Refusing to start: auth cannot be enforced (${problem}). ` +
+        'Set AUTH_SECRET and a user source, or set AUTH_DEV_BYPASS=1 to run without auth on purpose.'
     );
   }
-
-  // Auth is enabled if we have a secret AND (env users OR database)
-  return hasSecret && (hasUsers || hasDatabase);
 }
 
 export function devAuthBypassEnabled(): boolean {
@@ -238,14 +273,8 @@ function sign(secret: string, payloadB64: string): string {
 }
 
 export function getUserFromRequest(req: IncomingMessage): User | null {
-  if (!authEnabled())
-    return {
-      email: 'anonymous',
-      role: 'admin',
-      name: '',
-      isAdmin: true,
-    };
   if (devAuthBypassEnabled()) return devBypassUser();
+  if (!authEnabled()) return null;
   const secret = getSecret();
   const cookies = parseCookies(req.headers?.cookie);
   const token = cookies[sessionCookieName()];
@@ -375,15 +404,8 @@ export function clearSessionCookie(req: IncomingMessage, res: ServerResponse): v
 }
 
 export function verifyLogin(emailRaw: string, passwordRaw: string): UserWithVersion | null {
-  if (!authEnabled())
-    return {
-      email: 'anonymous',
-      role: 'admin',
-      name: '',
-      isAdmin: true,
-      v: 'anon',
-    };
   if (devAuthBypassEnabled()) return { ...devBypassUser(), v: 'dev' };
+  if (!authEnabled()) return null;
   const email = String(emailRaw || '')
     .trim()
     .toLowerCase();
@@ -421,16 +443,8 @@ export async function verifyLoginAsync(
   passwordRaw: string,
   ctx?: DbContext
 ): Promise<UserWithVersion | null> {
-  if (!authEnabled()) {
-    return {
-      email: 'anonymous',
-      role: 'admin',
-      name: '',
-      isAdmin: true,
-      v: 'anon',
-    };
-  }
   if (devAuthBypassEnabled()) return { ...devBypassUser(), v: 'dev' };
+  if (!authEnabled()) return null;
 
   const email = normalizeEmail(emailRaw);
   if (!email) return null;
@@ -512,15 +526,8 @@ export async function getUserFromRequestAsync(
   req: IncomingMessage,
   ctx?: DbContext
 ): Promise<User | null> {
-  if (!authEnabled()) {
-    return {
-      email: 'anonymous',
-      role: 'admin',
-      name: '',
-      isAdmin: true,
-    };
-  }
   if (devAuthBypassEnabled()) return devBypassUser();
+  if (!authEnabled()) return null;
 
   const secret = getSecret();
   const cookies = parseCookies(req.headers?.cookie);

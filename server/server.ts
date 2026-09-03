@@ -9,6 +9,7 @@ import { handleOidc } from './routes/oidc.js';
 import { serveStatic } from './routes/static.js';
 import { loadEnv, getConfig } from './config/env.js';
 import { initializeDatabase } from './db/client.js';
+import { assertAuthConfigured } from './auth/auth.js';
 
 async function handleRequest(req: IncomingMessage, res: ServerResponse): Promise<void> {
   const url = new URL(req.url || '/', `http://${req.headers.host}`);
@@ -52,6 +53,10 @@ async function start(): Promise<void> {
   // Initialize database connection (if STORAGE_MODE=postgres)
   await initializeDatabase();
 
+  // Refuse to serve at all when auth cannot be enforced. Has to run after
+  // initializeDatabase(), because the database is one of the two user sources.
+  assertAuthConfigured();
+
   const { port } = getConfig();
   const server = createServer(handleRequest);
 
@@ -60,4 +65,7 @@ async function start(): Promise<void> {
   });
 }
 
-start().catch(console.error);
+start().catch((error) => {
+  console.error(error instanceof Error ? error.message : error);
+  process.exit(1);
+});

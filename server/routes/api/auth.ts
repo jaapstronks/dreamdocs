@@ -69,7 +69,7 @@ export async function handleAuth({ req, res, url }: AuthContext): Promise<boolea
   // Get current user
   if (url.pathname === '/api/auth/me' && req.method === 'GET') {
     const user = await getUserFromRequestAsync(req);
-    if (!user && authEnabled()) {
+    if (!user) {
       unauthorized(res);
       return true;
     }

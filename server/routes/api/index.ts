@@ -18,7 +18,7 @@ import { handleMedia } from './media.js';
 import { handleCollaboration } from './collaboration.js';
 import { handleEvents } from './events.js';
 import { notFound, unauthorized } from '../../utils/http.js';
-import { authEnabled, authCutoverEnabled, getUserFromRequestAsync, type User } from '../../auth/auth.js';
+import { authCutoverEnabled, getUserFromRequestAsync, type User } from '../../auth/auth.js';
 import { normalizeEmail } from '../../storage/password-utils.js';
 
 export interface ApiContext {
@@ -82,11 +82,16 @@ export async function handleApi(ctx: ApiContext): Promise<void> {
 
   let authedUser: User | null;
   if (tokenMatches && isConvertPath) {
+    // Deliberately not an admin. /api/convert is a stateless render that reads
+    // no per-user state, and nothing in docbot authorizes on `role` today —
+    // access is per document, via authedUser.email. Handing the render token an
+    // admin role would only mean that the first admin-only route to land here
+    // inherits it silently.
     authedUser = {
       email: 'internal-service',
-      role: 'admin',
+      role: 'user',
       name: 'Internal Service',
-      isAdmin: true,
+      isAdmin: false,
     };
   } else if (tokenMatches && isDocumentsCreate) {
     // Trust the X-On-Behalf-Of email: the calling service (ciiicbot)
@@ -109,7 +114,7 @@ export async function handleApi(ctx: ApiContext): Promise<void> {
   } else {
     authedUser = await getUserFromRequestAsync(ctx.req);
   }
-  if (authEnabled() && !authedUser) {
+  if (!authedUser) {
     unauthorized(ctx.res);
     return;
   }
